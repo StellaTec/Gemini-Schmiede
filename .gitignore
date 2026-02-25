@@ -1,0 +1,9 @@
+# Gemini-Schmiede Ignore
+.gemini/logs/*.log
+.gemini/backups/
+.gemini/tmp/
+node_modules/
+tests/integrity_test_file.js
+tests/audit_test.js
+tests/integrity_test_source.js
+.env
