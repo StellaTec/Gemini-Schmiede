@@ -1,4 +1,4 @@
-const logger = require('../.gemini/utils/logger.js');
+const logger = require('../.gemini/utils/logger.cjs');
 const fs = require('fs');
 const path = require('path');
 

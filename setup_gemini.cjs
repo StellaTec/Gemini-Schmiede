@@ -1,10 +1,12 @@
+/**
+ * @file setup_gemini.cjs
+ * @description Projekt-Starter-Skript für die Gemini-Schmiede.
+ * Erstellt die notwendige Infrastruktur für agentenbasiertes Programmieren.
+ * @author WORKER-V1
+ */
+
 const fs = require('fs');
 const path = require('path');
-
-/**
- * Gemini-Schmiede: Projekt-Starter-Skript
- * Erstellt die notwendige Infrastruktur für sauberes, agentenbasiertes Programmieren.
- */
 
 const projectRoot = process.cwd();
 const geminiDir = path.join(projectRoot, '.gemini');
@@ -14,6 +16,7 @@ const dirs = [
   path.join(geminiDir, 'docs'),
   path.join(geminiDir, 'logs'),
   path.join(geminiDir, 'utils'),
+  path.join(geminiDir, 'utils', 'core'),
   path.join(projectRoot, 'tests')
 ];
 
@@ -27,8 +30,54 @@ dirs.forEach(dir => {
   }
 });
 
-// 2. Logger-Utility erstellen (.gemini/utils/logger.js)
-const loggerContent = `const fs = require('fs');
+// 2. FS-Utils erstellen
+const fsUtilsContent = `/**
+ * @file fs_utils.cjs
+ * @description Gemeinsame Dateisystem-Hilfsfunktionen.
+ * @author WORKER-V1
+ */
+const fs = require('fs');
+const path = require('path');
+
+function ensureDirExists(dirPath) {
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+  }
+}
+
+function readJson(filePath, defaultData = {}) {
+  try {
+    if (!fs.existsSync(filePath)) return defaultData;
+    const content = fs.readFileSync(filePath, 'utf8');
+    return JSON.parse(content);
+  } catch (err) {
+    return defaultData;
+  }
+}
+
+function writeJson(filePath, data) {
+  const dir = path.dirname(filePath);
+  ensureDirExists(dir);
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
+}
+
+function resolveAbsolutePath(filePath) {
+  return path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
+}
+
+module.exports = { ensureDirExists, readJson, writeJson, resolveAbsolutePath };
+`;
+
+fs.writeFileSync(path.join(geminiDir, 'utils', 'core', 'fs_utils.cjs'), fsUtilsContent);
+console.log('✅ Core FS-Utils installiert.');
+
+// 3. Logger-Utility erstellen
+const loggerContent = `/**
+ * @file logger.cjs
+ * @description Zentrales Logging-Modul.
+ * @author WORKER-V1
+ */
+const fs = require('fs');
 const path = require('path');
 
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'system.log');
@@ -41,16 +90,17 @@ class Logger {
 
   _log(level, message, context = this.context) {
     const timestamp = new Date().toISOString();
-    const formattedMessage = `[\${timestamp}] [\${level}] [\${context}] - \${message}`;
+    const formattedMessage = \`[\${timestamp}] [\${level}] [\${context}] - \${message}\`;
     if (level === 'ERROR') console.error(formattedMessage);
     else if (level === 'WARN') console.warn(formattedMessage);
     else console.log(formattedMessage);
 
     try {
-      fs.appendFileSync(LOG_FILE, formattedMessage + '
-', 'utf8');
+      const logsDir = path.dirname(LOG_FILE);
+      if (!fs.existsSync(logsDir)) fs.mkdirSync(logsDir, { recursive: true });
+      fs.appendFileSync(LOG_FILE, formattedMessage + '\\n', 'utf8');
     } catch (err) {
-      console.error(`Logger Error: \${err.message}`);
+      console.error(\`Logger Error: \${err.message}\`);
     }
   }
 
@@ -65,45 +115,25 @@ class Logger {
 module.exports = new Logger();
 `;
 
-fs.writeFileSync(path.join(geminiDir, 'utils', 'logger.js'), loggerContent);
+fs.writeFileSync(path.join(geminiDir, 'utils', 'logger.cjs'), loggerContent);
 console.log('✅ Logger-Utility installiert.');
 
-// 3. GEMINI.md (Das Projekt-Gesetz) erstellen
+// 4. GEMINI.md erstellen
 const geminiMdContent = `# Projekt: [PROJEKTNAME] (Agentic Workflow)
 
 ## Zentrale Mission
-Entwicklung eines hochstrukturierten Multi-Agenten-Systems mit strikter Trennung von Planung, Validierung und Ausführung.
+Entwicklung eines hochstrukturierten Multi-Agenten-Systems.
 
 ## Architektur-Prinzipien
 - **Persistenz-Zwang:** Pläne in /.gemini/plans/, Konzepte in /.gemini/docs/.
-- **Kontext-Hygiene:** Jede Session basiert auf einem spezifischen Plan-Schritt.
-- **Logging-Pflicht:** Nutzung von /.gemini/utils/logger.js für alle Aktionen.
+- **Logging-Pflicht:** Nutzung von /.gemini/utils/logger.cjs für alle Aktionen.
 
 ## Arbeitsanweisung für den Boss-Agenten
 1. Scanne GEMINI.md und /.gemini/plans/.
 2. Nutze den Logger mit Kontext [BOSS].
-3. Delegiere Planung an den planning-agent.
 `;
 
 fs.writeFileSync(path.join(projectRoot, 'GEMINI.md'), geminiMdContent);
 console.log('✅ GEMINI.md erstellt.');
 
-// 4. Initialer Willkommens-Plan
-const initialPlanContent = `# Plan: Projekt-Initialisierung
-
-## Kontext & Ziel
-Erster Plan nach dem Setup, um die Grundstruktur zu verifizieren.
-
-## Implementierungsschritte
-- [x] Schritt 1: Verzeichnisstruktur und Logger-Basis bereitstellen.
-- [ ] Schritt 2: Erste Feature-Planung mit dem planning-agent starten.
-
-## Checkpoint-Info
-Das Projekt-Skelett steht. Der Logger ist bereit unter /.gemini/utils/logger.js.
-`;
-
-fs.writeFileSync(path.join(geminiDir, 'plans', 'initial_setup.md'), initialPlanContent);
-console.log('✅ Initialer Setup-Plan erstellt.');
-
 console.log('--- SETUP ERFOLGREICH ABGESCHLOSSEN ---');
-console.log('Nächster Schritt: Starte Gemini und sage: "Lies GEMINI.md und fange mit Schritt 2 im initial_setup.md Plan an."');

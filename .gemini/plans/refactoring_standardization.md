@@ -12,11 +12,11 @@ Die Schmiede muss intern die höchsten Standards einhalten (Clean Code, Modul-Tr
 
 ## Implementierungsschritte (Checkliste)
 
-- [ ] Schritt 1: Code-Audit der bestehenden Skripte (`run_audit.cjs`, `logger.js`, `checkpoint_manager.js`) gegen `.gemini/docs/architecture_standards.md`.
-- [ ] Schritt 2: Vereinheitlichung des Modulsystems. Umstellung aller Skripte auf einen konsistenten Standard (z.B. konsequentes CommonJS für maximale Kompatibilität in Node-Umgebungen).
-- [ ] Schritt 3: Extraktion von Hilfsfunktionen. Gemeinsame Logik (Pfad-Auflösung, File-Reading) in ein neues Verzeichnis `.gemini/utils/core/` auslagern.
-- [ ] Schritt 4: Implementierung eines einheitlichen Error-Handling-Patterns. Alle Skripte nutzen den zentralen Logger für Fehlermeldungen und geben korrekte Exit-Codes zurück.
-- [ ] Schritt 5: Dokumentations-Update. JSDoc-Kommentare für alle Funktionen in den Utility-Skripten hinzufügen.
+- [x] Schritt 1: Code-Audit der bestehenden Skripte (`run_audit.cjs`, `logger.js`, `checkpoint_manager.js`) gegen `.gemini/docs/architecture_standards.md`.
+- [x] Schritt 2: Vereinheitlichung des Modulsystems. Umstellung aller Skripte auf einen konsistenten Standard (z.B. konsequentes CommonJS für maximale Kompatibilität in Node-Umgebungen).
+- [x] Schritt 3: Extraktion von Hilfsfunktionen. Gemeinsame Logik (Pfad-Auflösung, File-Reading) in ein neues Verzeichnis `.gemini/utils/core/` auslagern.
+- [x] Schritt 4: Implementierung eines einheitlichen Error-Handling-Patterns. Alle Skripte nutzen den zentralen Logger für Fehlermeldungen und geben korrekte Exit-Codes zurück.
+- [x] Schritt 5: Dokumentations-Update. JSDoc-Kommentare für alle Funktionen in den Utility-Skripten hinzufügen.
 
 ## Test-Strategie
 1. **Regressionstest:** Alle bestehenden Workflows (Plan erstellen -> Audit -> Checkpoint) müssen nach dem Refactoring noch funktionieren.

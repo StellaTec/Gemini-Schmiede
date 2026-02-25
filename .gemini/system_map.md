@@ -18,7 +18,7 @@ Agent-ID: BOSS-V1
 ## 🗺️ Projekt-Fahrplan (Kombinierte Roadmap)
 | ID | Feature / Modul | Status | Fokus | Plan-Datei |
 | :--- | :--- | :--- | :--- | :--- |
-| **REF01** | System-Standardisierung | ⏳ Aktiv | Clean Code & Modul-Check | `.gemini/plans/refactoring_standardization.md` |
+| **REF01** | System-Standardisierung | ✅ Abgeschlossen | Clean Code & Modul-Check | `.gemini/plans/refactoring_standardization.md` |
 | **GEN01** | Framework-Portabilität | ⏳ Bereit | gemini.config.json | `.gemini/plans/framework_portability.md` |
 | **SEC01** | Token-Security-Wächter | ⏳ Bereit | Schutz vor Context-Bloat | - |
 | **INFRA-GIT**| Git-Integrity-System | ⏳ Bereit | Ersetzt Backups durch Diffs | - |

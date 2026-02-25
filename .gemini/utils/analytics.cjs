@@ -1,15 +1,23 @@
-const fs = require('fs');
+/**
+ * @file analytics.cjs
+ * @description Analytics-Modul zum Tracking von System-Metriken.
+ * @author WORKER-V1
+ */
+
 const path = require('path');
-const logger = require('./logger').withContext('ANALYTICS');
+const logger = require('./logger.cjs').withContext('ANALYTICS');
+const { readJson, writeJson } = require('./core/fs_utils.cjs');
 
 const LOGS_DIR = path.join(__dirname, '..', 'logs');
 const STATS_FILE = path.join(LOGS_DIR, 'stats.json');
 
 /**
  * Analytics-Modul zum Tracking von System-Metriken.
- * Exportiert als Singleton.
  */
 class Analytics {
+  /**
+   * Initialisiert die Analytics und stellt sicher, dass die stats.json existiert.
+   */
   constructor() {
     this._ensureFileExists();
   }
@@ -20,15 +28,10 @@ class Analytics {
    */
   _ensureFileExists() {
     try {
-      if (!fs.existsSync(LOGS_DIR)) {
-        logger.info(`Erstelle Logs-Verzeichnis: ${LOGS_DIR}`);
-        fs.mkdirSync(LOGS_DIR, { recursive: true });
-      }
-
-      if (!fs.existsSync(STATS_FILE)) {
-        const initialData = { 'ai_agent_calls': 0 };
+      const data = readJson(STATS_FILE, null);
+      if (data === null) {
         logger.info(`Initialisiere stats.json: ${STATS_FILE}`);
-        fs.writeFileSync(STATS_FILE, JSON.stringify(initialData, null, 2), 'utf8');
+        writeJson(STATS_FILE, { 'ai_agent_calls': 0 });
       }
     } catch (err) {
       logger.error(`Fehler bei Verzeichnis-/Datei-Prüfung: ${err.message}`);
@@ -37,20 +40,18 @@ class Analytics {
 
   /**
    * Erhöht den Wert eines Schlüssels in der stats.json um 1.
-   * @param {string} key - Der zu erhöhende Schlüssel (z.B. 'ai_agent_calls')
+   * @param {string} key - Der zu erhöhende Schlüssel (z.B. 'ai_agent_calls').
    */
   incrementStat(key) {
     try {
-      this._ensureFileExists();
-      const content = fs.readFileSync(STATS_FILE, 'utf8');
-      const data = JSON.parse(content);
+      const data = readJson(STATS_FILE, { 'ai_agent_calls': 0 });
       
       if (typeof data[key] === 'undefined') {
         data[key] = 0;
       }
-      
+
       data[key]++;
-      fs.writeFileSync(STATS_FILE, JSON.stringify(data, null, 2), 'utf8');
+      writeJson(STATS_FILE, data);
       logger.debug(`Statistik '${key}' auf ${data[key]} erhöht.`);
     } catch (err) {
       logger.error(`Fehler beim Erhöhen der Statistik '${key}': ${err.message}`);
@@ -66,13 +67,11 @@ class Analytics {
 
   /**
    * Gibt die aktuellen Statistiken zurück.
-   * @returns {Object} Die aktuellen Metriken aus der stats.json
+   * @returns {Object} Die aktuellen Metriken aus der stats.json.
    */
   getStats() {
     try {
-      this._ensureFileExists();
-      const content = fs.readFileSync(STATS_FILE, 'utf8');
-      return JSON.parse(content);
+      return readJson(STATS_FILE, { 'ai_agent_calls': 0 });
     } catch (err) {
       logger.error(`Fehler beim Abrufen der Statistiken: ${err.message}`);
       return {};
