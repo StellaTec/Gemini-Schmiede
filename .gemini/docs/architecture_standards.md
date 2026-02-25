@@ -1,3 +1,9 @@
+<!-- Zweck: Definition der Clean-Code-Regeln und Architektur-Vorgaben, Agent-ID: BOSS-V1 -->
+
+<!--
+Zweck: Definition der architektonischen Leitplanken und Qualitäts-Standards.
+Agent-ID: BOSS-V1
+-->
 # Architektur-Standards: Die Clean-Code-Regeln
 
 Jedes Projekt in der Gemini-Schmiede MUSS nach folgenden Standards aufgebaut werden:

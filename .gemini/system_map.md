@@ -1,3 +1,9 @@
+<!-- Zweck: Zentrale Übersicht über den Systemstatus und Fahrplan, Agent-ID: BOSS-V1 -->
+
+<!--
+Zweck: Zentrale Übersicht über den System-Status und den Projekt-Fahrplan.
+Agent-ID: BOSS-V1
+-->
 # Gemini-Schmiede: System-Map & Fahrplan
 
 ## 🚀 System-Status (Infrastruktur)
