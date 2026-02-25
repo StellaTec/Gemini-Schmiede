@@ -4,27 +4,23 @@
 | Komponente | Status | Beschreibung |
 | :--- | :--- | :--- |
 | **Logging** | ✅ Aktiv | Zentraler Logger unter `.gemini/utils/logger.js` |
-| **Analytics** | ✅ Aktiv | Tracking von Metriken in `.gemini/utils/analytics.js` |
-| **Quality-Inspector** | ✅ Aktiv | Validierung via `run_audit.cjs` (Hybrid: Lokal + KI) |
-| **Checkpoint-Manager** | ✅ Aktiv | Automatisches Abhaken von Plänen |
-| **Planning-Agent** | ✅ Aktiv | Strukturierte Planung in `.gemini/plans/` |
+| **Integrity-Guardian**| ✅ Aktiv | Schutz vor Code-Verlust (PROD00) |
+| **Git-Integration** | ✅ Aktiv | Lokale & Remote Versionierung |
+| **Quality-Inspector** | ✅ Aktiv | Hybrid-Audit (Lokal + KI) |
+| **Analytics** | ✅ Aktiv | Agenten-Call-Tracking |
 
-## 🗺️ Projekt-Fahrplan (Features & Produkte)
-| ID | Feature / Modul | Status | Aktueller Schritt | Plan-Datei |
+## 🗺️ Projekt-Fahrplan (Kombinierte Roadmap)
+| ID | Feature / Modul | Status | Fokus | Plan-Datei |
 | :--- | :--- | :--- | :--- | :--- |
-| **REF01** | Refactoring & Standardisierung| ⏳ Aktiv | Plan erstellt / Audit läuft | `.gemini/plans/refactoring_standardization.md` |
-| **GEN01** | Framework-Portabilität | ⏳ Bereit | Wartet auf REF01 | `.gemini/plans/framework_portability.md` |
-| **PROD00** | Integrity-Guardian | ✅ 100% | Abgeschlossen | `.gemini/plans/integrity_guardian.md` |
-| **SEC01** | Token-Security-Warning | ⏳ Bereit | Schutz vor Context-Bloat | - |
-| **ARCH01** | Clean Architecture Engine | ⏳ Bereit | Modulare Struktur & Standards | - |
-| **PROD01** | TDD-Agent (Test-Driven) | ⏳ Bereit | Wartet auf GEN01 | - |
-| **PROD02** | Refactoring-Agent | ⏳ Bereit | Wartet auf PROD01 | - |
-| **PROD03** | Dokumentations-Sync | ⏳ Bereit | Wartet auf PROD02 | - |
+| **REF01** | System-Standardisierung | ⏳ Aktiv | Clean Code & Modul-Check | `.gemini/plans/refactoring_standardization.md` |
+| **GEN01** | Framework-Portabilität | ⏳ Bereit | gemini.config.json | `.gemini/plans/framework_portability.md` |
+| **SEC01** | Token-Security-Wächter | ⏳ Bereit | Schutz vor Context-Bloat | - |
+| **ARCH01** | Clean-Architecture-Engine| ⏳ Bereit | 500-Zeilen-Regel (Auto) | - |
+| **PROD01** | TDD-Agent (Test-First) | ⏳ Bereit | Das Herz der Schmiede | - |
+| **PROD02** | Refactoring-Agent | ⏳ Bereit | Automatische Code-Pflege | - |
+| **PHASE-3** | **Forge-Autonomy** | 🚀 Geplant | Autonome Produktion | - |
 
 ## 📂 Wichtige Ressourcen
+- **Vision:** `.gemini/docs/vision.md`
+- **Standards:** `.gemini/docs/architecture_standards.md`
 - **Zentrale Regeln:** `GEMINI.md`
-- **Dokumentation:** `.gemini/docs/`
-- **Utility-Scripts:** `.gemini/utils/`
-
----
-*Letztes Update: 2026-02-25 | Stand: Infrastruktur bereit für Feature-Entwicklung.*
