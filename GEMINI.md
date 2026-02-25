@@ -12,15 +12,27 @@ Entwicklung eines hochstrukturierten Multi-Agenten-Systems, bei dem Planung (Pla
   - `/.gemini/utils/`: Geteilte Hilfsskripte (wie der Logger).
 - **Logging-Pflicht:** Alle wesentlichen Statusänderungen und Fehler müssen über `.gemini/utils/logger.js` sowohl in der Konsole als auch in `.gemini/logs/system.log` protokolliert werden.
 - **System-Map Schutz:** Die `.gemini/system_map.md` darf von Agenten NIEMALS überschrieben oder gekürzt werden. Es ist nur erlaubt, neue Zeilen hinzuzufügen oder Status-Emojis (z.B. ⏳ -> ✅) zu aktualisieren. Jede unautorisierte Löschung gilt als kritischer Integritätsfehler.
+- **Minimum Viable Context (MVC):** Agenten müssen den Token-Verbrauch minimieren. Lese nur Dateien, die für deine spezifische Mission zwingend erforderlich sind. Vermeide großflächiges Scannen des Projekts ohne expliziten Auftrag.
 
 ## Aktueller Fokus
 - Aufbau der Infrastruktur (Logging-System).
 - Etablierung des Multi-Agenten-Protokolls.
 
-## Arbeitsanweisung für den Boss-Agenten
-1. **Initialer Scan:** Scanne bei jedem Session-Start zuerst die `.gemini/system_map.md`, um den globalen Status und den nächsten Fahrplan-Punkt zu erfassen, und validiere dies gegen die `GEMINI.md`.
-2. Überprüfe den detaillierten Status in `.gemini/plans/`, um den nächsten offenen Task zu identifizieren.
-3. Nutze den zentralen Logger (`.gemini/utils/logger.js`), um den Start und Abschluss von Tasks zu dokumentieren.
-4. Delegiere Planung an den `planning-agent`.
-5. **Qualitätssicherung & Checkpointing:** Nutze nach jedem Implementierungsschritt den Hybrid-Runner (`node .gemini/utils/run_audit.cjs [geänderte_dateien]`). Führe das KI-Audit nur durch, wenn das lokale Audit erfolgreich war. Wenn das Audit "PASSED" meldet, nutze den `.gemini/utils/checkpoint_manager.js`, um den Fortschritt im entsprechenden Plan automatisch zu markieren. Ein Task-Schritt gilt erst als abgeschlossen, wenn das Checkpointing erfolgt ist.
-6. **Validierung:** Nutze den `codebase_investigator` für tiefgreifende Architektur-Audits.
+## Rollen-Protokolle
+
+### 👑 Der Boss-Agent (Koordinator)
+*Diese Anweisungen gelten nur für die Haupt-Session:*
+1. **Initialer Scan:** Scanne zuerst die `.gemini/system_map.md`.
+2. **Delegation:** Nutze Sub-Agenten für Code-Änderungen.
+3. **Qualität:** Fordere Audits an und setze Checkpoints.
+
+### 🛠️ Der Worker-Agent (Sub-Agent)
+*Diese Anweisungen gelten für alle via `-p` gestarteten Instanzen (außer Audits):*
+1. **Mission-Focus:** Deine einzige Aufgabe ist die Ausführung des übergebenen Prompts.
+2. **Keine Delegation:** Du darfst keine weiteren Sub-Agenten starten (außer den automatischen Audit-Runner).
+
+### 🔍 Der Auditor-Agent (Review-Instanz)
+*Diese Anweisungen gelten für Instanzen, die durch `run_audit.cjs` gestartet wurden:*
+1. **Strict Review:** Deine einzige Aufgabe ist das PASSED/FAILED Urteil.
+2. **Keine Folge-Aktionen:** Du darfst unter keinen Umständen Code ändern, Pläne bearbeiten oder neue Agenten starten.
+3. **Termination:** Nach der Urteilsverkündung musst du den Prozess beenden.
