@@ -13,7 +13,7 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **INFRA** | Basis-Infrastruktur | ✅ 100% | Abgeschlossen | (Diverse) |
 | **PROD00** | Integrity-Guardian | ✅ 100% | Abgeschlossen | `.gemini/plans/integrity_guardian.md` |
-| **INFRA+** | Git-Integration | ⏳ Bereit | Token-Ersparnis & Diffs | - |
+| **INFRA+** | Git-Integration | ✅ 100% | Blaupause erstellt | - |
 | **SEC01** | Token-Security-Warning | ⏳ Bereit | Schutz vor Context-Bloat | - |
 | **ARCH01** | Clean Architecture Engine | ⏳ Bereit | Modulare Struktur & Standards | - |
 | **PROD01** | TDD-Agent (Test-Driven) | ⏳ Bereit | Wartet auf INFRA+ | - |
