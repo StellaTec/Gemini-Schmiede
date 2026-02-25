@@ -12,12 +12,12 @@
 ## 🗺️ Projekt-Fahrplan (Features & Produkte)
 | ID | Feature / Modul | Status | Aktueller Schritt | Plan-Datei |
 | :--- | :--- | :--- | :--- | :--- |
-| **INFRA** | Basis-Infrastruktur | ✅ 100% | Abgeschlossen | (Diverse) |
+| **REF01** | Refactoring & Standardisierung| ⏳ Aktiv | Plan erstellt / Audit läuft | `.gemini/plans/refactoring_standardization.md` |
+| **GEN01** | Framework-Portabilität | ⏳ Bereit | Wartet auf REF01 | `.gemini/plans/framework_portability.md` |
 | **PROD00** | Integrity-Guardian | ✅ 100% | Abgeschlossen | `.gemini/plans/integrity_guardian.md` |
-| **INFRA+** | Git-Integration | ✅ 100% | Blaupause erstellt | - |
 | **SEC01** | Token-Security-Warning | ⏳ Bereit | Schutz vor Context-Bloat | - |
 | **ARCH01** | Clean Architecture Engine | ⏳ Bereit | Modulare Struktur & Standards | - |
-| **PROD01** | TDD-Agent (Test-Driven) | ⏳ Bereit | Wartet auf INFRA+ | - |
+| **PROD01** | TDD-Agent (Test-Driven) | ⏳ Bereit | Wartet auf GEN01 | - |
 | **PROD02** | Refactoring-Agent | ⏳ Bereit | Wartet auf PROD01 | - |
 | **PROD03** | Dokumentations-Sync | ⏳ Bereit | Wartet auf PROD02 | - |
 
