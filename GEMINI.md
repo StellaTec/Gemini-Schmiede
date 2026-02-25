@@ -11,6 +11,7 @@ Entwicklung eines hochstrukturierten Multi-Agenten-Systems, bei dem Planung (Pla
   - `/.gemini/docs/`: Langfristige Architektur- und Design-Entscheidungen.
   - `/.gemini/utils/`: Geteilte Hilfsskripte (wie der Logger).
 - **Logging-Pflicht:** Alle wesentlichen Statusänderungen und Fehler müssen über `.gemini/utils/logger.js` sowohl in der Konsole als auch in `.gemini/logs/system.log` protokolliert werden.
+- **System-Map Schutz:** Die `.gemini/system_map.md` darf von Agenten NIEMALS überschrieben oder gekürzt werden. Es ist nur erlaubt, neue Zeilen hinzuzufügen oder Status-Emojis (z.B. ⏳ -> ✅) zu aktualisieren. Jede unautorisierte Löschung gilt als kritischer Integritätsfehler.
 
 ## Aktueller Fokus
 - Aufbau der Infrastruktur (Logging-System).
