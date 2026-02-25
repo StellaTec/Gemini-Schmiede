@@ -2,6 +2,7 @@ const fs = require('fs');
 const { spawnSync } = require('child_process');
 const path = require('path');
 const logger = require('./logger').withContext('HYBRID-RUNNER');
+const { incrementAgentCount, getStats } = require('./analytics');
 
 const filesToAudit = process.argv.slice(2);
 
@@ -44,6 +45,7 @@ for (const file of filesToAudit) {
 
 // --- STUFE 2 ---
 logger.info('>>> STUFE 2: Starte isoliertes KI-Audit via Gemini-CLI...');
+incrementAgentCount();
 
 const auditPrompt = `Führe ein Qualitäts-Audit mit dem Skill 'quality-inspector' für folgende Dateien durch: ${filesToAudit.join(', ')}. Antworte nur mit 'PASSED' oder einer Liste von Fehlern.`;
 
@@ -59,6 +61,10 @@ if (aiAudit.status !== 0) {
   logger.error('STUFE 2 (KI) FEHLGESCHLAGEN.');
   process.exit(1);
 }
+
+const currentStats = getStats();
+logger.info('Aktuelle Statistiken aus stats.json:');
+logger.info(JSON.stringify(currentStats, null, 2));
 
 logger.info('Gesamtes Hybrid-Audit erfolgreich abgeschlossen.');
 process.exit(0);

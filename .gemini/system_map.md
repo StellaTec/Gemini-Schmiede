@@ -4,6 +4,7 @@
 | Komponente | Status | Beschreibung |
 | :--- | :--- | :--- |
 | **Logging** | ✅ Aktiv | Zentraler Logger unter `.gemini/utils/logger.js` |
+| **Analytics** | ✅ Aktiv | Tracking von Metriken in `.gemini/utils/analytics.js` |
 | **Quality-Inspector** | ✅ Aktiv | Validierung via `run_audit.cjs` (Hybrid: Lokal + KI) |
 | **Checkpoint-Manager** | ✅ Aktiv | Automatisches Abhaken von Plänen |
 | **Planning-Agent** | ✅ Aktiv | Strukturierte Planung in `.gemini/plans/` |
