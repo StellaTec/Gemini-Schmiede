@@ -21,3 +21,8 @@ Jedes Projekt in der Gemini-Schmiede MUSS nach folgenden Standards aufgebaut wer
 - Strikte Trennung der Verzeichnisse.
 - Kommunikation nur über definierte APIs (REST/GraphQL/etc.).
 - Keine direkten Dateizugriffe oder DB-Aufrufe vom Frontend aus.
+
+## 5. Versionskontrolle (Git-Flow)
+- **Branch-per-Feature:** Jedes neue Feature (z.B. PROD01) MUSS in einem eigenen Branch (z.B. `feature/PROD01-tdd-agent`) entwickelt werden.
+- **Merge-Policy:** Ein Merge in den `master`/`main` erfolgt erst, wenn das finale Audit PASSED meldet.
+- **Diff-Integrität:** In Git-Umgebungen ersetzt der `git diff` den manuellen Backup-Ordner für den Integrity-Guardian.

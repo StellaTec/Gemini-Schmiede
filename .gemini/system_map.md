@@ -15,6 +15,8 @@
 | **REF01** | System-Standardisierung | ⏳ Aktiv | Clean Code & Modul-Check | `.gemini/plans/refactoring_standardization.md` |
 | **GEN01** | Framework-Portabilität | ⏳ Bereit | gemini.config.json | `.gemini/plans/framework_portability.md` |
 | **SEC01** | Token-Security-Wächter | ⏳ Bereit | Schutz vor Context-Bloat | - |
+| **INFRA-GIT**| Git-Integrity-System | ⏳ Bereit | Ersetzt Backups durch Diffs | - |
+| **PROD-BRANCH**| Branch-per-Feature | ⏳ Bereit | Isolierte Feature-Entwicklung | - |
 | **ARCH01** | Clean-Architecture-Engine| ⏳ Bereit | 500-Zeilen-Regel (Auto) | - |
 | **PROD01** | TDD-Agent (Test-First) | ⏳ Bereit | Das Herz der Schmiede | - |
 | **PROD02** | Refactoring-Agent | ⏳ Bereit | Automatische Code-Pflege | - |
