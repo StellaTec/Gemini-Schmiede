@@ -90,13 +90,14 @@ function getDynamicThreshold(lineCount) {
 
 /**
  * Extrahiert Funktions- und Klassen-Definitionen aus einem Code-String.
- * Erkennt: function name(), const name = () =>, const name = arg =>, class name
+ * Erkennt: function name(), const name = () =>, class name, sowie moderne Exports.
  *
  * @param {string} content - Roher Datei-Inhalt
  * @returns {string[]} Liste normalisierter Symbol-Strings
  */
 function extractSymbols(content) {
-  const pattern = /(function\s+\w+|const\s+\w+\s*=\s*(\([^)]*\)|[\w$]+)\s*=>|class\s+\w+)/g;
+  // Erkennt: function foo, const foo = (), class Foo, async function, etc.
+  const pattern = /(?:async\s+)?function\s+[\w$]+|(?:const|let|var)\s+[\w$]+\s*=\s*(?:async\s*)?(?:\([^)]*\)|[\w$]+)\s*=>|class\s+[\w$]+/g;
   return (content.match(pattern) || []).map(s => s.replace(/\s+/g, ' ').trim());
 }
 

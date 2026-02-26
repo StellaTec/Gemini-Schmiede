@@ -34,6 +34,10 @@
     "maxFileSizeBytes": 10485760,
     "console":          true
   },
+  "security": {
+    "maxFileSizeKb":        512,
+    "tokenWarningThreshold": 100000
+  },
   "integrity": {
     "defaultThreshold": 0.15,
     "minAbsoluteLoss":  3,

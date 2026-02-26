@@ -1,7 +1,7 @@
 <!-- project_context.md — Lebendiges Projektdokument -->
 <!-- Dieses Dokument beschreibt das GEBAUTE PROJEKT, nicht das Framework. -->
 <!-- Es wird automatisch von Agenten via context_updater.js aktualisiert. -->
-<!-- Letzte Aktualisierung: 2026-02-26T16:59:31.414Z -->
+<!-- Letzte Aktualisierung: 2026-02-26T19:54:10.139Z -->
 
 # Projekt-Kontext: [PROJEKT-NAME]
 
@@ -49,6 +49,7 @@ Haupt-Technologien, Einstiegspunkte, Verzeichnis-Struktur des Projekts.
 - 📋 Feature-Name — geplant
 
 ---
+✅ Recovery-System v2.0 — Token-Guardian & Git-Snapshots integriert (2026-02-26)
 
 ## Offene Probleme
 
@@ -69,6 +70,7 @@ Haupt-Technologien, Einstiegspunkte, Verzeichnis-Struktur des Projekts.
 
 ---
 - CTXT01: Project-Context-System eingebaut (2026-02-26)
+MERGE-v2 abgeschlossen: Recovery-System erfolgreich in v2.0-Architektur integriert und via Hybrid-Audit verifiziert.
 
 ## Abhaengigkeiten
 
