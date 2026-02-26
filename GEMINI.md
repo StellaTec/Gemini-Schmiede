@@ -1,38 +1,73 @@
-# Projekt: Gemini-Schmiede (Agentic Workflow)
+# Projekt: Gemini-Schmiede v2.0.0 (Agentic Workflow)
 
 ## Zentrale Mission
-Entwicklung eines hochstrukturierten Multi-Agenten-Systems, bei dem Planung (Planning-Agent), Validierung (Code-Agent) und Ausführung (Boss/Koordinator) strikt getrennt sind, um fehlerfreie Ergebnisse in isolierten Kontexten zu garantieren.
+Entwicklung eines hochstrukturierten Multi-Agenten-Systems, bei dem Planung (Planning-Agent),
+Validierung (Quality-Inspector) und Ausfuehrung (Worker) strikt getrennt sind.
+Ziel: Wiederverwendbares Framework fuer jedes Projekt - agnostisch gegenueber Sprache und Stack.
 
 ## Architektur-Prinzipien (Strenge Regeln)
-- **Persistenz-Zwang:** Kein Plan darf nur im Chat existieren. Alle Konzepte müssen in `.gemini/docs/` und alle Pläne in `.gemini/plans/` gespeichert werden.
-- **Kontext-Hygiene:** Jeder neue Chat-Task muss sich auf einen spezifischen Schritt in einem existierenden Plan beziehen.
-- **Verzeichnis-Struktur:**
-  - `/.gemini/plans/`: Aktuelle Schritt-für-Schritt-Pläne mit Checkboxen.
-  - `/.gemini/docs/`: Langfristige Architektur- und Design-Entscheidungen.
-  - `/.gemini/utils/`: Geteilte Hilfsskripte (wie der Logger).
-- **Logging-Pflicht:** Alle wesentlichen Statusänderungen und Fehler müssen über `.gemini/utils/logger.js` sowohl in der Konsole als auch in `.gemini/logs/system.log` protokolliert werden.
-- **System-Map Schutz:** Die `.gemini/system_map.md` darf von Agenten NIEMALS überschrieben oder gekürzt werden. Es ist nur erlaubt, neue Zeilen hinzuzufügen oder Status-Emojis (z.B. ⏳ -> ✅) zu aktualisieren. Jede unautorisierte Löschung gilt als kritischer Integritätsfehler.
-- **Minimum Viable Context (MVC):** Agenten müssen den Token-Verbrauch minimieren. Lese nur Dateien, die für deine spezifische Mission zwingend erforderlich sind. Vermeide großflächiges Scannen des Projekts ohne expliziten Auftrag.
 
-## Aktueller Fokus
-- Aufbau der Infrastruktur (Logging-System).
-- Etablierung des Multi-Agenten-Protokolls.
+- **Persistenz-Zwang:** Kein Plan darf nur im Chat existieren. Alle Konzepte in `.gemini/docs/`, alle Plaene in `.gemini/plans/`.
+- **Kontext-Hygiene:** Jede neue Session bezieht sich auf einen spezifischen Schritt in einem existierenden Plan.
+- **Verzeichnis-Struktur:**
+  - `.gemini/plans/` - Aktive Schritt-fuer-Schritt-Plaene mit Checkboxen
+  - `.gemini/docs/` - Langfristige Architektur- und Design-Entscheidungen
+  - `.gemini/utils/` - Geteilte Hilfsskripte (Logger, Audit, Checkpoint)
+  - `.gemini/utils/core/` - Foundation-Utilities (config, path-resolver, error-handler)
+  - `.gemini/logs/` - system.log und stats.json
+  - `skills/` - Wiederverwendbare Agent-Skills (quality-inspector, planning-agent)
+- **Logging-Pflicht:** Alle wesentlichen Statusaenderungen und Fehler ueber `.gemini/utils/logger.js` protokollieren. Kein direktes `console.log()` in Produktionscode.
+- **System-Map Schutz:** `.gemini/system_map.md` darf NIEMALS ueberschrieben oder gekuerzt werden. Nur neue Zeilen hinzufuegen oder Status-Emojis aktualisieren.
+- **Minimum Viable Context (MVC):** Token-Verbrauch minimieren. Nur notwendige Dateien lesen. Kein grossflaechiges Scannen ohne expliziten Auftrag.
+- **Config-First:** Alle Pfade und Einstellungen aus `gemini.config.json`. Keine Hardcodierung.
 
 ## Rollen-Protokolle
 
-### 👑 Der Boss-Agent (Koordinator)
-*Diese Anweisungen gelten nur für die Haupt-Session:*
-1. **Initialer Scan:** Scanne zuerst die `.gemini/system_map.md`.
-2. **Delegation:** Nutze Sub-Agenten für Code-Änderungen.
-3. **Qualität:** Fordere Audits an und setze Checkpoints.
+### Der Boss-Agent (Koordinator)
+*Diese Anweisungen gelten nur fuer die Haupt-Session:*
+1. **Initialer Scan:** Lese `.gemini/system_map.md` und den aktuellen Plan.
+2. **Config laden:** Alle Pfade aus `gemini.config.json` - NICHT hardcodieren.
+3. **Delegation:** Sub-Agenten starten fuer Implementierung.
+4. **Nach jeder Implementierung:** Audit starten: `node .gemini/utils/run_audit.cjs <dateien>`
+5. **Nach PASSED:** Checkpoint setzen: `node .gemini/utils/checkpoint_manager.js <plan> <schritt>`
+6. **System-Map** nach Abschluss eines Tasks aktualisieren (Status-Emoji).
 
-### 🛠️ Der Worker-Agent (Sub-Agent)
-*Diese Anweisungen gelten für alle via `-p` gestarteten Instanzen (außer Audits):*
-1. **Mission-Focus:** Deine einzige Aufgabe ist die Ausführung des übergebenen Prompts.
-2. **Keine Delegation:** Du darfst keine weiteren Sub-Agenten starten (außer den automatischen Audit-Runner).
+### Der Worker-Agent (Implementierer)
+*Diese Anweisungen gelten fuer alle via Prompt gestarteten Instanzen (ausser Audits):*
+1. **Mission-Focus:** Exakt den definierten Schritt ausfuehren - kein Scope Creep.
+2. **Logger:** `const logger = require('.gemini/utils/logger').withContext('WORKER');`
+3. **Kein console.log:** Immer `logger.info()` / `logger.error()` nutzen.
+4. **Keine Delegation:** Keine weiteren Sub-Agenten starten.
+5. **Kein Context Bloat:** Nur Dateien lesen die direkt benoetigt werden.
 
-### 🔍 Der Auditor-Agent (Review-Instanz)
-*Diese Anweisungen gelten für Instanzen, die durch `run_audit.cjs` gestartet wurden:*
-1. **Strict Review:** Deine einzige Aufgabe ist das PASSED/FAILED Urteil.
-2. **Keine Folge-Aktionen:** Du darfst unter keinen Umständen Code ändern, Pläne bearbeiten oder neue Agenten starten.
-3. **Termination:** Nach der Urteilsverkündung musst du den Prozess beenden.
+### Der Auditor-Agent (Quality-Inspector)
+*Diese Anweisungen gelten fuer Instanzen die durch `run_audit.cjs` gestartet wurden:*
+1. **Strict Review:** Einzige Aufgabe: PASSED oder FAILED Urteil faellen.
+2. **Pruef-Kriterien:**
+   - Logger-Import in allen neuen JS/CJS Dateien vorhanden?
+   - Dateien in korrekten Verzeichnissen?
+   - Scope eingehalten (nur der geplante Schritt)?
+   - Fehlerbehandlung vorhanden?
+3. **Keine Folge-Aktionen:** Kein Code aendern, keine Plaene bearbeiten, keine Agenten starten.
+4. **Termination:** Nach dem Urteil Prozess beenden.
+
+## Standard-Workflow fuer neue Features
+
+```
+1. PLAN:    planning-agent -> .gemini/plans/<feature>.md erstellen
+2. IMPL:    Worker-Agent -> einen Schritt implementieren
+3. AUDIT:   node .gemini/utils/run_audit.cjs <geaenderte-dateien>
+4. CHECKPOINT (wenn PASSED): node .gemini/utils/checkpoint_manager.js <plan> <n>
+5. Repeat ab 2 bis alle Schritte abgehakt
+```
+
+## Wichtige Befehle
+
+| Befehl | Zweck |
+|--------|-------|
+| `node setup_gemini.cjs` | Neues Projekt initialisieren |
+| `node .gemini/utils/run_audit.cjs <files>` | Hybrid-Audit starten |
+| `node .gemini/utils/checkpoint_manager.js <plan> <n>` | Schritt abhaken |
+| `node tests/run_tests.cjs` | Test-Suite ausfuehren |
+| `node tests/run_tests.cjs --verbose` | Test-Suite mit Details |
+| `LOG_LEVEL=DEBUG node <script>` | Debug-Logging aktivieren |

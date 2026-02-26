@@ -1,0 +1,19 @@
+{
+  "name": "gemini-schmiede",
+  "version": "2.0.0",
+  "description": "Modulares Multi-Agenten-Framework fuer autonome Software-Entwicklung",
+  "main": "setup_gemini.cjs",
+  "scripts": {
+    "setup":      "node setup_gemini.cjs",
+    "audit":      "node .gemini/utils/run_audit.cjs",
+    "validate":   "node .gemini/utils/validate_local.js",
+    "test":       "node tests/run_tests.cjs",
+    "checkpoint": "node .gemini/utils/checkpoint_manager.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["gemini", "multi-agent", "ai", "automation", "code-quality", "agentic-workflow"],
+  "license": "MIT",
+  "private": true
+}

@@ -1,26 +1,32 @@
-# Implementierungsplan: System-Refactoring & Standardisierung
-
-Dieses Modul fokussiert sich auf die interne Qualität der Gemini-Schmiede, um technische Schulden abzubauen und eine saubere Codebasis für die Portabilität zu schaffen.
+# Implementierungsplan: REF01 - System-Refactoring & Standardisierung
 
 ## Kontext & Ziel
-Die Schmiede muss intern die höchsten Standards einhalten (Clean Code, Modul-Trennung, Fehlerbehandlung), bevor sie als Framework skaliert.
+Interne Qualitaet der Gemini-Schmiede auf hoechste Standards bringen (Clean Code,
+Modul-Trennung, Fehlerbehandlung) als Grundlage fuer die Framework-Portabilitaet.
 
 ## Schnittstellen & Architektur
-- **Module:** Konsolidierung von CJS/ESM (Entscheidung für einen Standard).
-- **Fehlerbehandlung:** Zentralisierung des Error-Handlings in den Utility-Skripten.
-- **Logik-Trennung:** Extraktion von Geschäftslogik aus CLI-Wrappern (z.B. Audit-Logik vs. Audit-CLI).
+- **Module:** Konsolidierung auf konsistentes CommonJS (`.js`/`.cjs`)
+- **Fehlerbehandlung:** Zentralisierung in `.gemini/utils/core/error-handler.cjs`
+- **Logik-Trennung:** Extraktion von Kern-Logik in `.gemini/utils/core/`
 
 ## Implementierungsschritte (Checkliste)
 
-- [ ] Schritt 1: Code-Audit der bestehenden Skripte (`run_audit.cjs`, `logger.js`, `checkpoint_manager.js`) gegen `.gemini/docs/architecture_standards.md`.
-- [ ] Schritt 2: Vereinheitlichung des Modulsystems. Umstellung aller Skripte auf einen konsistenten Standard (z.B. konsequentes CommonJS für maximale Kompatibilität in Node-Umgebungen).
-- [ ] Schritt 3: Extraktion von Hilfsfunktionen. Gemeinsame Logik (Pfad-Auflösung, File-Reading) in ein neues Verzeichnis `.gemini/utils/core/` auslagern.
-- [ ] Schritt 4: Implementierung eines einheitlichen Error-Handling-Patterns. Alle Skripte nutzen den zentralen Logger für Fehlermeldungen und geben korrekte Exit-Codes zurück.
-- [ ] Schritt 5: Dokumentations-Update. JSDoc-Kommentare für alle Funktionen in den Utility-Skripten hinzufügen.
+- [x] Schritt 1: Code-Audit der bestehenden Skripte gegen architecture_standards.md.
+- [x] Schritt 2: Vereinheitlichung des Modulsystems auf konsequentes CommonJS.
+- [x] Schritt 3: Extraktion von Hilfsfunktionen in `.gemini/utils/core/` (path-resolver, config, error-handler).
+- [x] Schritt 4: Einheitliches Error-Handling-Pattern in allen Skripten implementiert.
+- [x] Schritt 5: JSDoc-Kommentare fuer alle Funktionen hinzugefuegt.
 
 ## Test-Strategie
-1. **Regressionstest:** Alle bestehenden Workflows (Plan erstellen -> Audit -> Checkpoint) müssen nach dem Refactoring noch funktionieren.
-2. **Linting:** Einführung eines strikten Linting-Regelsatzes für die `.gemini/utils/`.
+1. **Regressionstest:** `node tests/run_tests.cjs` - alle 5 Tests bestanden.
+2. **Audit-Test:** `node .gemini/utils/run_audit.cjs .gemini/utils/logger.js`
+
+## Ergebnis
+Alle Schritte abgeschlossen. Neue Dateien erstellt:
+- `.gemini/utils/core/path-resolver.cjs` - Dynamische Pfadaufloesung
+- `.gemini/utils/core/config.cjs` - Singleton Config-Loader
+- `.gemini/utils/core/error-handler.cjs` - Zentrales Error-Handling
+Alle bestehenden Utils: vollstaendige JSDoc, Config-Integration, robustes Error-Handling.
 
 ## Checkpoint-Info
-Plan für das interne Refactoring erstellt. Dies ist die Voraussetzung für eine saubere Portabilität.
+REF01 abgeschlossen. System-Standardisierung erreicht. Basis fuer GEN01 gelegt.

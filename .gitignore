@@ -1,9 +1,25 @@
-# Gemini-Schmiede Ignore
+# Gemini-Schmiede .gitignore
+
+# Logs (System-Log nicht einchecken - wachst unbegrenzt)
 .gemini/logs/*.log
+
+# Backups (werden durch Git-History ersetzt)
 .gemini/backups/
+
+# Temporaere Dateien
 .gemini/tmp/
+.gemini/tmp-*/
+*.tmp
+
+# Node.js
 node_modules/
-tests/integrity_test_file.js
-tests/audit_test.js
-tests/integrity_test_source.js
+
+# Umgebungsvariablen
 .env
+.env.local
+.env.*.local
+
+# Test-Hilfsdateien (werden dynamisch generiert)
+tests/integrity_test_file.js
+tests/integrity_test_source.js
+tests/audit_test.js

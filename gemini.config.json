@@ -1,0 +1,67 @@
+{
+  "version": "2.0.0",
+  "project": {
+    "name": "gemini-schmiede",
+    "description": "Modulares Multi-Agenten-Framework fuer autonome Software-Entwicklung",
+    "language": "de"
+  },
+  "paths": {
+    "utils":   ".gemini/utils",
+    "logs":    ".gemini/logs",
+    "plans":   ".gemini/plans",
+    "docs":    ".gemini/docs",
+    "skills":  ".gemini/skills",
+    "backups": ".gemini/backups",
+    "tests":   "tests"
+  },
+  "logging": {
+    "level":            "INFO",
+    "file":             ".gemini/logs/system.log",
+    "maxFileSizeBytes": 10485760,
+    "console":          true
+  },
+  "integrity": {
+    "defaultThreshold": 0.15,
+    "minAbsoluteLoss":  3,
+    "strictSymbols":    true,
+    "thresholds": {
+      "tiny":   { "maxLines": 20,   "tolerance": 0.40 },
+      "small":  { "maxLines": 100,  "tolerance": 0.15 },
+      "medium": { "maxLines": 200,  "tolerance": 0.10 },
+      "large":  { "maxLines": null, "tolerance": 0.05 }
+    }
+  },
+  "analytics": {
+    "statsFile": ".gemini/logs/stats.json"
+  },
+  "audit": {
+    "command":         "gemini",
+    "flags":           ["-y", "-p"],
+    "timeout":         30000,
+    "stages":          ["local", "integrity", "ai"],
+    "localScript":     ".gemini/utils/validate_local.js",
+    "integrityScript": ".gemini/utils/integrity_check.js"
+  },
+  "validation": {
+    "loggerPatterns": [
+      ".gemini/utils/logger",
+      "require('./logger'",
+      "require('../utils/logger'"
+    ],
+    "excludeFromLoggerCheck": [
+      "logger.js",
+      "validate_local.js",
+      "error-handler.cjs",
+      "run_tests.cjs"
+    ],
+    "warnOnConsoleLogs":      true,
+    "maxFileLinesWarning":    500
+  },
+  "agents": {
+    "boss":    { "context": "BOSS" },
+    "planner": { "context": "PLANNER" },
+    "reviewer":{ "context": "REVIEWER" },
+    "worker":  { "context": "WORKER" },
+    "auditor": { "context": "HYBRID-RUNNER" }
+  }
+}

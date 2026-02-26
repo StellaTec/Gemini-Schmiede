@@ -1,27 +1,34 @@
-# Implementierungsplan: Framework-Portabilität & Generalisierung
-
-Dieses Modul zielt darauf ab, die Gemini-Schmiede von einer projektspezifischen Lösung in ein universell einsetzbares Agentic-Workflow-Framework zu verwandeln.
+# Implementierungsplan: GEN01 - Framework-Portabilitaet & Generalisierung
 
 ## Kontext & Ziel
-Die Schmiede soll in jedem beliebigen Projekt (unabhängig von Sprache oder Stack) durch einfaches Kopieren oder ein Setup-Skript einsatzbereit sein. Alle projektspezifischen Logiken werden in eine zentrale Konfiguration ausgelagert.
+Die Gemini-Schmiede von einer projektspezifischen Loesung in ein universell
+einsetzbares Agentic-Workflow-Framework umwandeln. Einsatzbereit in jedem Projekt
+durch einfaches Kopieren und Ausfuehren von `setup_gemini.cjs`.
 
 ## Schnittstellen & Architektur
-- **Zentrales Element:** `gemini.config.json` im Projekt-Root.
-- **Betroffene Tools:** `run_audit.cjs`, `logger.js`, `setup_gemini.cjs`, `checkpoint_manager.js`.
-- **Eingabe:** Projektspezifische Befehle (Lint, Test, Build) via Config.
+- **Zentrales Element:** `gemini.config.json` im Projekt-Root
+- **Betroffene Tools:** `run_audit.cjs`, `logger.js`, `setup_gemini.cjs`, `checkpoint_manager.js`
+- **Eingabe:** Projektspezifische Befehle (Test, Lint, Build) via Config
 
 ## Implementierungsschritte (Checkliste)
 
-- [ ] Schritt 1: Definition und Erstellung der `gemini.config.json` Struktur.
-- [ ] Schritt 2: Portabilitäts-Audit der Utility-Skripte. Ersetzen aller hartcodierten Pfade durch dynamische Auflösung (CWD).
-- [ ] Schritt 3: Refactoring von `run_audit.cjs`. Dynamisches Laden der Test/Lint-Befehle aus der `gemini.config.json`.
-- [ ] Schritt 4: Upgrade von `setup_gemini.cjs`. Das Skript soll als Installer fungieren (Config anlegen, Ordnerstruktur initialisieren, Templates kopieren).
-- [ ] Schritt 5: Dokumentations-Templates erstellen. Basis-Standards in `.gemini/docs/` als Vorlage für neue Projekte.
+- [x] Schritt 1: Definition und Erstellung der `gemini.config.json` Struktur (Projekt-Root).
+- [x] Schritt 2: Portabilitaets-Audit. Alle hartcodierten Pfade durch dynamische Aufloesung ersetzt.
+- [x] Schritt 3: Refactoring `run_audit.cjs`. Dynamisches Laden aus `gemini.config.json`.
+- [x] Schritt 4: Upgrade `setup_gemini.cjs` als vollstaendiger Installer (idempotent, Node.js Check).
+- [x] Schritt 5: Dokumentations-Templates (GEMINI.md Template in setup_gemini.cjs integriert).
 
 ## Test-Strategie
-1. **Mock-Integration:** Die Schmiede in einen leeren Test-Ordner kopieren und `setup_gemini.cjs` ausführen.
-2. **Config-Test:** Prüfen, ob `run_audit.cjs` korrekt reagiert, wenn in der Config kein Test-Befehl oder ein spezifischer Befehl (z.B. `echo "Success"`) steht.
-3. **Pfad-Validierung:** Ausführen der Skripte aus verschiedenen Unterverzeichnissen, um die Robustheit der Pfadauflösung sicherzustellen.
+1. **Config-Test:** `node tests/test_config.cjs` - PASSED.
+2. **Setup-Test:** `node setup_gemini.cjs` - idempotent, keine Fehler.
+3. **Pfad-Validierung:** `node tests/run_tests.cjs` - alle Tests bestanden.
+
+## Ergebnis
+Alle Schritte abgeschlossen. Neue Dateien:
+- `gemini.config.json` - Zentrale Konfiguration im Projekt-Root
+- `package.json` - NPM-Metadaten und Scripts
+- `.gemini/utils/core/path-resolver.cjs` - Dynamische Root-Erkennung
+- `.gemini/utils/core/config.cjs` - Config-Loader mit Deep-Merge
 
 ## Checkpoint-Info
-Plan erstellt und in Roadmap integriert. Nächster Schritt: Definition der `gemini.config.json`.
+GEN01 abgeschlossen. Framework ist portabel. `setup_gemini.cjs` dient als Installer.
