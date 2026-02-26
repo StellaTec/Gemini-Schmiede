@@ -1,7 +1,7 @@
 <!-- project_context.md — Lebendiges Projektdokument -->
 <!-- Dieses Dokument beschreibt das GEBAUTE PROJEKT, nicht das Framework. -->
 <!-- Es wird automatisch von Agenten via context_updater.js aktualisiert. -->
-<!-- Letzte Aktualisierung: 2026-02-26T19:54:10.139Z -->
+<!-- Letzte Aktualisierung: 2026-02-26T20:05:32.999Z -->
 
 # Projekt-Kontext: [PROJEKT-NAME]
 
@@ -50,6 +50,7 @@ Haupt-Technologien, Einstiegspunkte, Verzeichnis-Struktur des Projekts.
 
 ---
 ✅ Recovery-System v2.0 — Token-Guardian & Git-Snapshots integriert (2026-02-26)
+✅ Auto-Checkpointing v2.0 — Mit Git-Snapshot Integration & Status-Reporting (2026-02-26)
 
 ## Offene Probleme
 
