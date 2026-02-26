@@ -86,7 +86,8 @@ class GitIntegrity {
       execSync('git reset --hard', { stdio: 'pipe' });
       
       // 2. Alle neuen/untrackten Dateien löschen, die Konflikte verursachen könnten
-      execSync('git clean -fd', { stdio: 'pipe' });
+      // WICHTIG: Wir schließen .gemini/ aus, um keine Pläne oder Utils zu verlieren!
+      execSync('git clean -fd -e .gemini/', { stdio: 'pipe' });
       
       // 3. Den Snapshot zurückholen
       execSync('git stash pop', { stdio: 'pipe' });
