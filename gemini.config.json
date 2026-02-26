@@ -10,7 +10,7 @@
     "logs":    ".gemini/logs",
     "plans":   ".gemini/plans",
     "docs":    ".gemini/docs",
-    "skills":  ".gemini/skills",
+    "skills":  "skills",
     "backups": ".gemini/backups",
     "tests":   "tests"
   },
@@ -57,11 +57,56 @@
     "warnOnConsoleLogs":      true,
     "maxFileLinesWarning":    500
   },
+  "github": {
+    "mainBranch":              "main",
+    "branchPrefix":            "feature/",
+    "branchPerFeatureRequired": true,
+    "commitMsgMaxLen":         72
+  },
+  "session": {
+    "stateFile": ".gemini/logs/session_state.json",
+    "autoSave":  true
+  },
   "agents": {
-    "boss":    { "context": "BOSS" },
-    "planner": { "context": "PLANNER" },
-    "reviewer":{ "context": "REVIEWER" },
-    "worker":  { "context": "WORKER" },
-    "auditor": { "context": "HYBRID-RUNNER" }
+    "boss": {
+      "context":      "BOSS",
+      "allowedFiles": ["GEMINI.md", ".gemini/system_map.md", ".gemini/plans/**", ".gemini/logs/**"]
+    },
+    "planner": {
+      "context":      "PLANNER",
+      "allowedFiles": ["GEMINI.md", ".gemini/plans/**", ".gemini/docs/**"]
+    },
+    "reviewer": {
+      "context":      "REVIEWER",
+      "allowedFiles": [".gemini/plans/**", "src/**", "tests/**"]
+    },
+    "worker": {
+      "context":      "WORKER",
+      "allowedFiles": ["<plan-step-files-only>"]
+    },
+    "auditor": {
+      "context":      "HYBRID-RUNNER",
+      "allowedFiles": [".gemini/utils/**", "tests/**"]
+    },
+    "architecture-analyst": {
+      "context":      "ARCH-ANALYST",
+      "allowedFiles": ["src/**", ".gemini/docs/**", "GEMINI.md"]
+    },
+    "refactoring-agent": {
+      "context":      "REFACTOR",
+      "allowedFiles": ["<plan-step-files-only>"]
+    },
+    "tdd-agent": {
+      "context":      "TDD",
+      "allowedFiles": ["tests/**", "<plan-step-feature-files>"]
+    },
+    "frontend-agent": {
+      "context":      "FRONTEND",
+      "allowedFiles": ["src/frontend/**", "public/**", "assets/**"]
+    },
+    "backend-agent": {
+      "context":      "BACKEND",
+      "allowedFiles": ["src/backend/**", "src/api/**", "src/db/**"]
+    }
   }
 }

@@ -17,7 +17,15 @@
 | **Analytics** | ✅ Aktiv | Call-Tracking: `.gemini/utils/analytics.js` |
 | **Git-Integration** | ✅ Aktiv | Lokale & Remote Versionierung |
 | **Quality-Inspector** | ✅ Aktiv | Skill + Audit-Runner: `skills/quality-inspector/` |
-| **Test-Suite** | ✅ Aktiv | 5 Tests: `tests/run_tests.cjs` |
+| **Test-Suite** | ✅ Aktiv | 7 Tests: `tests/run_tests.cjs` |
+| **Session-State** | ✅ Aktiv | Crash-Recovery: `.gemini/utils/session_state.js` |
+| **Git-Manager** | ✅ Aktiv | Branch-Automation: `.gemini/utils/git_manager.js` |
+| **Diff-Reviewer** | ✅ Aktiv | Scope-Enforcement: `.gemini/utils/diff_reviewer.cjs` |
+| **Architecture-Analyst** | ✅ Aktiv | READ-ONLY Analyse-Skill: `skills/architecture-analyst/` |
+| **Refactoring-Agent** | ✅ Aktiv | Chirurgisches Refactoring: `skills/refactoring-agent/` |
+| **TDD-Agent** | ✅ Aktiv | Test-First-Workflow: `skills/tdd-agent/` |
+| **Frontend-Agent** | ✅ Aktiv | UI-Spezialist: `skills/frontend-agent/` |
+| **Backend-Agent** | ✅ Aktiv | Server-Spezialist: `skills/backend-agent/` |
 
 ## Projekt-Fahrplan (Roadmap)
 
@@ -26,12 +34,13 @@
 | **REF01** | System-Standardisierung | ✅ Abgeschlossen | Clean Code, JSDoc, Error-Handling | `.gemini/plans/refactoring_standardization.md` |
 | **GEN01** | Framework-Portabilitaet | ✅ Abgeschlossen | gemini.config.json, path-resolver | `.gemini/plans/framework_portability.md` |
 | **TEST-CHKPT** | Auto-Checkpointing Test | ✅ Abgeschlossen | test_checkpoint.cjs | `.gemini/plans/test_auto_checkpoint.md` |
-| **SEC01** | Token-Security-Waechter | ⏳ Bereit | Schutz vor Context-Bloat | - |
-| **INFRA-GIT** | Git-Integrity-System | ⏳ Bereit | Ersetzt Backups durch Git-Diffs | - |
-| **PROD-BRANCH** | Branch-per-Feature | ⏳ Bereit | Isolierte Feature-Entwicklung | - |
-| **ARCH01** | Clean-Architecture-Engine | ⏳ Bereit | 500-Zeilen-Regel (Auto) | - |
-| **PROD01** | TDD-Agent (Test-First) | ⏳ Bereit | Das Herz der Schmiede | - |
-| **PROD02** | Refactoring-Agent | ⏳ Bereit | Automatische Code-Pflege | - |
+| **SEC01** | Token-Security-Waechter | ✅ Abgeschlossen | MVC-Regeln in GEMINI.md + allowedFiles per Agent | - |
+| **INFRA-GIT** | Git-Integrity-System | ✅ Abgeschlossen | diff_reviewer.cjs + git_manager.js | - |
+| **PROD-BRANCH** | Branch-per-Feature | ✅ Abgeschlossen | git_manager.js + GitHub-Workflow in GEMINI.md | - |
+| **ARCH01** | Clean-Architecture-Engine | ✅ Abgeschlossen | architecture-analyst Skill + 500-Zeilen-Regel | - |
+| **PROD01** | TDD-Agent (Test-First) | ✅ Abgeschlossen | skills/tdd-agent/SKILL.md | - |
+| **PROD02** | Refactoring-Agent | ✅ Abgeschlossen | skills/refactoring-agent/SKILL.md | - |
+| **SESS01** | Crash-Recovery-System | ✅ Abgeschlossen | session_state.js + Session-Resume-Protokoll | - |
 | **PHASE-3** | **Forge-Autonomy** | 🚀 Geplant | Autonome Produktion | - |
 
 ## Wichtige Ressourcen

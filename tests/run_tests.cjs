@@ -28,6 +28,8 @@ const TEST_FILES = [
   'tests/test_checkpoint.cjs',
   'tests/test_integrity.cjs',
   'tests/test_analytics.cjs',
+  'tests/test_session_state.cjs',
+  'tests/test_git_manager.cjs',
 ];
 
 // ---------------------------------------------------------------------------
