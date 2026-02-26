@@ -157,6 +157,15 @@ function createFeatureBranch(name) {
  */
 function commitWithMessage(msg, files) {
   validateRequired(msg, 'commit message');
+  
+  // Strikte Durchsetzung der Branch-Regel vor jedem Commit (v2.1)
+  try {
+    validateBranchForFeature();
+  } catch (error) {
+    logger.error(`Commit abgebrochen: ${error.message}`);
+    return false;
+  }
+
   const cfg    = getConfig();
   const maxLen = (cfg.github && cfg.github.commitMsgMaxLen) || 72;
 

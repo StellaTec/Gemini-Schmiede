@@ -66,7 +66,7 @@ Ziel: Wiederverwendbares Framework fuer jedes Projekt - agnostisch gegenueber Sp
 ## GitHub-Workflow (PFLICHT)
 
 - Jedes Feature MUSS auf eigenem Branch: `feature/TASK-NAME`
-- NIEMALS direkt auf `main` oder `master` committen
+- NIEMALS direkt auf `main` oder `master` committen (technisch erzwungen durch `git_manager.js`)
 - Branch-Erstellung: `node .gemini/utils/git_manager.js create <name>`
 - Vor jedem Commit Scope pruefen: `node .gemini/utils/diff_reviewer.cjs review`
 - Commit-Message max 72 Zeichen, imperativ, praezise
