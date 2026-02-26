@@ -12,7 +12,7 @@ Ziel ist die Bereitstellung eines sauberen "Gemini-Schmiede" Templates, das nur 
 - [x] Schritt 1: Erstellen des Branches `template/v2` ausgehend vom aktuellen Stand.
 - [x] Schritt 2: Bereinigung des Branches (Löschen von `.gemini/plans/*.md`, außer Vorlagen).
 - [x] Schritt 3: Leeren der Logs in `.gemini/logs/` und Zurücksetzen der `system_map.md`.
-- [ ] Schritt 4: Implementierung von `.gemini/utils/core/export_template.js` zum automatisierten Export des Kerns.
+- [x] Schritt 4: Implementierung von `.gemini/utils/core/export_template.js` zum automatisierten Export des Kerns.
 - [x] Schritt 5: Dokumentation des "New Project" Workflows in `docs/template_usage.md`.
 
 ## Test-Strategie
@@ -21,4 +21,4 @@ Ziel ist die Bereitstellung eines sauberen "Gemini-Schmiede" Templates, das nur 
 - Validierung der `system_map.md` Struktur im Template.
 
 ## Checkpoint-Info
-Status: Planung abgeschlossen. Bereit für Schritt 1 (Branch-Erstellung).
+Status: Projekt erfolgreich abgeschlossen (Framework-Template v2.0.0 bereit). Alle Schritte verifiziert und audit-konform.
