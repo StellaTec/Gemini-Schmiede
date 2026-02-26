@@ -1,7 +1,7 @@
 <!-- project_context.md — Lebendiges Projektdokument -->
 <!-- Dieses Dokument beschreibt das GEBAUTE PROJEKT, nicht das Framework. -->
 <!-- Es wird automatisch von Agenten via context_updater.js aktualisiert. -->
-<!-- Letzte Aktualisierung: 2026-02-26T20:05:32.999Z -->
+<!-- Letzte Aktualisierung: 2026-02-26T20:24:28.477Z -->
 
 # Projekt-Kontext: [PROJEKT-NAME]
 
@@ -72,6 +72,8 @@ Haupt-Technologien, Einstiegspunkte, Verzeichnis-Struktur des Projekts.
 ---
 - CTXT01: Project-Context-System eingebaut (2026-02-26)
 MERGE-v2 abgeschlossen: Recovery-System erfolgreich in v2.0-Architektur integriert und via Hybrid-Audit verifiziert.
+System-Map aktualisiert: MERGE-v2 auf ✅ Abgeschlossen gesetzt (2026-02-26)
+PHASE-3 aus der Roadmap in system_map.md entfernt (2026-02-26)
 
 ## Abhaengigkeiten
 

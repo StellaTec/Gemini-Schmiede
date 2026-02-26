@@ -32,19 +32,6 @@
 
 | ID | Feature / Modul | Status | Fokus | Plan-Datei |
 | :--- | :--- | :--- | :--- | :--- |
-| **REF01** | System-Standardisierung | ✅ Abgeschlossen | Clean Code, JSDoc, Error-Handling | `.gemini/plans/refactoring_standardization.md` |
-| **GEN01** | Framework-Portabilitaet | ✅ Abgeschlossen | gemini.config.json, path-resolver | `.gemini/plans/framework_portability.md` |
-| **TEST-CHKPT** | Auto-Checkpointing Test | ✅ Abgeschlossen | test_checkpoint.cjs | `.gemini/plans/test_auto_checkpoint.md` |
-| **SEC01** | Token-Security-Waechter | ✅ Abgeschlossen | MVC-Regeln in GEMINI.md + allowedFiles per Agent | - |
-| **INFRA-GIT** | Git-Integrity-System | ✅ Abgeschlossen | diff_reviewer.cjs + git_manager.js | - |
-| **PROD-BRANCH** | Branch-per-Feature | ✅ Abgeschlossen | git_manager.js + GitHub-Workflow in GEMINI.md | - |
-| **ARCH01** | Clean-Architecture-Engine | ✅ Abgeschlossen | architecture-analyst Skill + 500-Zeilen-Regel | - |
-| **PROD01** | TDD-Agent (Test-First) | ✅ Abgeschlossen | skills/tdd-agent/SKILL.md | - |
-| **PROD02** | Refactoring-Agent | ✅ Abgeschlossen | skills/refactoring-agent/SKILL.md | - |
-| **SESS01** | Crash-Recovery-System | ✅ Abgeschlossen | session_state.js + Session-Resume-Protokoll | - |
-| **CTXT01** | **Project-Context-System** | ✅ Abgeschlossen | Projekt-Gedächtnis, Sektions-Updates, BOSS-Orientierung | `.gemini/plans/project_context_system.md` | 
-| **MERGE-v2** | Recovery in v2.0 (Claude) | ⏳ Planung | Fusion der Systeme | `.gemini/plans/merge_recovery_claude.md` |
-| **PHASE-3** | **Forge-Autonomy** | 🚀 Geplant | Autonome Produktion | - |
 
 ## Wichtige Ressourcen
 
