@@ -2,7 +2,7 @@
  * Demo-Skript zur Verifikation des Logging-Systems.
  * Zeigt die Nutzung verschiedener Log-Level und Kontexte.
  */
-const logger = require('../.gemini/utils/logger');
+const logger = require('../.gemini/utils/logger.cjs');
 
 console.log('--- STARTE LOGGER DEMO ---');
 

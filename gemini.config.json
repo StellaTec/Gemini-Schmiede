@@ -1,0 +1,16 @@
+{
+  "project_name": "Gemini-Schmiede",
+  "version": "1.0.0",
+  "paths": {
+    "plans": ".gemini/plans",
+    "docs": ".gemini/docs",
+    "logs": ".gemini/logs",
+    "utils": ".gemini/utils",
+    "backups": ".gemini/backups",
+    "tests": "tests"
+  },
+  "commands": {
+    "test": "node tests/test_logger.cjs",
+    "lint": "echo 'No lint command configured'"
+  }
+}
