@@ -6,13 +6,27 @@
     "language": "de"
   },
   "paths": {
-    "utils":   ".gemini/utils",
-    "logs":    ".gemini/logs",
-    "plans":   ".gemini/plans",
-    "docs":    ".gemini/docs",
-    "skills":  "skills",
-    "backups": ".gemini/backups",
-    "tests":   "tests"
+    "utils":          ".gemini/utils",
+    "logs":           ".gemini/logs",
+    "plans":          ".gemini/plans",
+    "docs":           ".gemini/docs",
+    "skills":         "skills",
+    "backups":        ".gemini/backups",
+    "tests":          "tests",
+    "projectContext": "project_context.md"
+  },
+  "contextUpdater": {
+    "metaFile":  ".gemini/logs/context_meta.json",
+    "sections": [
+      "Projekt",
+      "Architektur",
+      "Datenhaltung",
+      "Aktive Features",
+      "Offene Probleme",
+      "Letzte Aenderungen",
+      "Abhaengigkeiten",
+      "Umgebung"
+    ]
   },
   "logging": {
     "level":            "INFO",

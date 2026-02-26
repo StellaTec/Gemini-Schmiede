@@ -25,7 +25,7 @@ Ziel: Wiederverwendbares Framework fuer jedes Projekt - agnostisch gegenueber Sp
 
 ### Der Boss-Agent (Koordinator)
 *Diese Anweisungen gelten nur fuer die Haupt-Session:*
-1. **Initialer Scan:** Lese `.gemini/system_map.md` und den aktuellen Plan.
+1. **Initialer Scan:** Lese `project_context.md` (Was ist das Projekt?), dann `.gemini/system_map.md` und den aktuellen Plan.
 2. **Config laden:** Alle Pfade aus `gemini.config.json` - NICHT hardcodieren.
 3. **Delegation:** Sub-Agenten starten fuer Implementierung.
 4. **Nach jeder Implementierung:** Audit starten: `node .gemini/utils/run_audit.cjs <dateien>`
@@ -96,8 +96,8 @@ Jeder Agent liest **nur** seine zugewiesenen Dateien - kein grossflaechiges Scan
 
 | Agent              | Erlaubte Dateien                                              |
 |--------------------|---------------------------------------------------------------|
-| BOSS               | `GEMINI.md`, `system_map.md`, `plans/**`, `logs/**`           |
-| PLANNER            | `GEMINI.md`, `plans/**`, `docs/**`                            |
+| BOSS               | `project_context.md`, `GEMINI.md`, `system_map.md`, `plans/**`, `logs/**` |
+| PLANNER            | `project_context.md`, `GEMINI.md`, `plans/**`, `docs/**`      |
 | WORKER             | Nur Dateien des zugewiesenen Plan-Schritts                    |
 | REVIEWER           | `plans/**`, Aenderungs-Diff                                   |
 | AUDITOR            | `utils/**`, `tests/**`                                        |
@@ -122,6 +122,10 @@ Jeder Agent liest **nur** seine zugewiesenen Dateien - kein grossflaechiges Scan
 
 | Befehl | Zweck |
 |--------|-------|
+| `node .gemini/utils/context_updater.js status` | Projekt-Kontext Sektions-Übersicht |
+| `node .gemini/utils/context_updater.js read "<Sektion>"` | Sektion lesen |
+| `node .gemini/utils/context_updater.js append "<Sektion>" "<Zeile>"` | Zeile anhängen |
+| `node .gemini/utils/context_updater.js update "<Sektion>" "<Inhalt>"` | Sektion ersetzen |
 | `node setup_gemini.cjs` | Neues Projekt initialisieren |
 | `node .gemini/utils/run_audit.cjs <files>` | Hybrid-Audit starten |
 | `node .gemini/utils/checkpoint_manager.js <plan> <n>` | Schritt abhaken |

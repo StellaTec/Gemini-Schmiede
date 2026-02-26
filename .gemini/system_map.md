@@ -22,6 +22,7 @@
 | **Git-Manager** | ✅ Aktiv | Branch-Automation: `.gemini/utils/git_manager.js` |
 | **Diff-Reviewer** | ✅ Aktiv | Scope-Enforcement: `.gemini/utils/diff_reviewer.cjs` |
 | **Architecture-Analyst** | ✅ Aktiv | READ-ONLY Analyse-Skill: `skills/architecture-analyst/` |
+| **Context-Updater** | ✅ Aktiv | Projekt-Gedächtnis: `project_context.md` + `.gemini/utils/context_updater.js` |
 | **Refactoring-Agent** | ✅ Aktiv | Chirurgisches Refactoring: `skills/refactoring-agent/` |
 | **TDD-Agent** | ✅ Aktiv | Test-First-Workflow: `skills/tdd-agent/` |
 | **Frontend-Agent** | ✅ Aktiv | UI-Spezialist: `skills/frontend-agent/` |
@@ -41,6 +42,7 @@
 | **PROD01** | TDD-Agent (Test-First) | ✅ Abgeschlossen | skills/tdd-agent/SKILL.md | - |
 | **PROD02** | Refactoring-Agent | ✅ Abgeschlossen | skills/refactoring-agent/SKILL.md | - |
 | **SESS01** | Crash-Recovery-System | ✅ Abgeschlossen | session_state.js + Session-Resume-Protokoll | - |
+| **CTXT01** | **Project-Context-System** | ✅ Abgeschlossen | Projekt-Gedächtnis, Sektions-Updates, BOSS-Orientierung | `.gemini/plans/project_context_system.md` |
 | **PHASE-3** | **Forge-Autonomy** | 🚀 Geplant | Autonome Produktion | - |
 
 ## Wichtige Ressourcen
