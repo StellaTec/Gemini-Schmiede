@@ -12,5 +12,9 @@
   "commands": {
     "test": "node tests/test_logger.cjs",
     "lint": "echo 'No lint command configured'"
+  },
+  "security": {
+    "max_file_size_kb": 512,
+    "token_warning_threshold": 100000
   }
 }
