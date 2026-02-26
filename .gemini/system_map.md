@@ -42,7 +42,8 @@
 | **PROD01** | TDD-Agent (Test-First) | ✅ Abgeschlossen | skills/tdd-agent/SKILL.md | - |
 | **PROD02** | Refactoring-Agent | ✅ Abgeschlossen | skills/refactoring-agent/SKILL.md | - |
 | **SESS01** | Crash-Recovery-System | ✅ Abgeschlossen | session_state.js + Session-Resume-Protokoll | - |
-| **CTXT01** | **Project-Context-System** | ✅ Abgeschlossen | Projekt-Gedächtnis, Sektions-Updates, BOSS-Orientierung | `.gemini/plans/project_context_system.md` |
+| **CTXT01** | **Project-Context-System** | ✅ Abgeschlossen | Projekt-Gedächtnis, Sektions-Updates, BOSS-Orientierung | `.gemini/plans/project_context_system.md` | 
+| **MERGE-v2** | Recovery in v2.0 (Claude) | ⏳ Planung | Fusion der Systeme | `.gemini/plans/merge_recovery_claude.md` |
 | **PHASE-3** | **Forge-Autonomy** | 🚀 Geplant | Autonome Produktion | - |
 
 ## Wichtige Ressourcen
