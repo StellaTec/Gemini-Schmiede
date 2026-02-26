@@ -12,11 +12,11 @@ Die Schmiede soll in jedem beliebigen Projekt (unabhängig von Sprache oder Stac
 
 ## Implementierungsschritte (Checkliste)
 
-- [ ] Schritt 1: Definition und Erstellung der `gemini.config.json` Struktur.
-- [ ] Schritt 2: Portabilitäts-Audit der Utility-Skripte. Ersetzen aller hartcodierten Pfade durch dynamische Auflösung (CWD).
-- [ ] Schritt 3: Refactoring von `run_audit.cjs`. Dynamisches Laden der Test/Lint-Befehle aus der `gemini.config.json`.
-- [ ] Schritt 4: Upgrade von `setup_gemini.cjs`. Das Skript soll als Installer fungieren (Config anlegen, Ordnerstruktur initialisieren, Templates kopieren).
-- [ ] Schritt 5: Dokumentations-Templates erstellen. Basis-Standards in `.gemini/docs/` als Vorlage für neue Projekte.
+- [x] Schritt 1: Definition und Erstellung der `gemini.config.json` Struktur.
+- [x] Schritt 2: Portabilitäts-Audit der Utility-Skripte. Ersetzen aller hartcodierten Pfade durch dynamische Auflösung (CWD).
+- [x] Schritt 3: Refactoring von `run_audit.cjs`. Dynamisches Laden der Test/Lint-Befehle aus der `gemini.config.json`.
+- [x] Schritt 4: Upgrade von `setup_gemini.cjs`. Das Skript soll als Installer fungieren (Config anlegen, Ordnerstruktur initialisieren, Templates kopieren).
+- [x] Schritt 5: Dokumentations-Templates erstellen. Basis-Standards in `.gemini/docs/` als Vorlage für neue Projekte.
 
 ## Test-Strategie
 1. **Mock-Integration:** Die Schmiede in einen leeren Test-Ordner kopieren und `setup_gemini.cjs` ausführen.

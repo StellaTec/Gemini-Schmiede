@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const logger = require('../logger.cjs');
 
 /**
  * Stellt sicher, dass ein Verzeichnis existiert. Erstellt es rekursiv, falls nicht.
@@ -29,6 +30,7 @@ function readJson(filePath, defaultData = {}) {
     const content = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(content);
   } catch (err) {
+    logger.error(`Fehler beim Lesen der JSON-Datei ${filePath}: ${err.message}`);
     return defaultData;
   }
 }
@@ -53,9 +55,24 @@ function resolveAbsolutePath(filePath) {
   return path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
 }
 
+/**
+ * Lädt die Gemini-Konfiguration aus dem Projekt-Root.
+ * @returns {Object} Die Konfiguration oder Standardwerte.
+ */
+function getGeminiConfig() {
+  const configPath = resolveAbsolutePath('gemini.config.json');
+  return readJson(configPath, {
+    project_name: 'Gemini-Schmiede',
+    version: '1.0.0',
+    paths: {},
+    commands: {}
+  });
+}
+
 module.exports = {
   ensureDirExists,
   readJson,
   writeJson,
-  resolveAbsolutePath
+  resolveAbsolutePath,
+  getGeminiConfig
 };

@@ -5,22 +5,39 @@
  */
 
 const fs = require('fs');
-const { spawnSync } = require('child_process');
+const { spawnSync, execSync } = require('child_process');
 const path = require('path');
 const logger = require('./logger.cjs').withContext('HYBRID-RUNNER');
 const { incrementAgentCount, getStats } = require('./analytics.cjs');
+const { getGeminiConfig, resolveAbsolutePath } = require('./core/fs_utils.cjs');
 
 /**
  * Führt den Hybrid-Audit-Prozess durch.
  * @param {string[]} filesToAudit - Liste der zu auditierenden Dateien.
  */
 function runHybridAudit(filesToAudit) {
+  const config = getGeminiConfig();
+  const paths = config.paths || {};
+  const commands = config.commands || {};
+
   if (filesToAudit.length === 0) {
     logger.info('Keine Dateien zum Auditieren angegeben.');
     process.exit(0);
   }
 
   logger.info(`Starte Hybrid-Audit für: ${filesToAudit.join(', ')}`);
+
+  // --- STUFE 0: Dynamische Test-Kommandos aus Config ---
+  if (commands.test) {
+    logger.info(`>>> STUFE 0: Führe konfigurierte Test-Befehle aus: \${commands.test}`);
+    try {
+      execSync(commands.test, { stdio: 'inherit', cwd: process.cwd() });
+      logger.info('Test-Befehle erfolgreich ausgeführt.');
+    } catch (err) {
+      logger.error('Konfigurierte Test-Befehle fehlgeschlagen. Breche Audit ab.');
+      process.exit(1);
+    }
+  }
 
   // --- STUFE 1 ---
   logger.info('>>> STUFE 1: Starte lokales Audit...');
@@ -36,8 +53,9 @@ function runHybridAudit(filesToAudit) {
 
   // --- STUFE 1.5: Integritäts-Check ---
   logger.info('>>> STUFE 1.5: Starte Integritäts-Check...');
+  const backupDir = paths.backups || '.gemini/backups';
   for (const file of filesToAudit) {
-    const backupPath = path.join('.gemini', 'backups', file);
+    const backupPath = resolveAbsolutePath(path.join(backupDir, file));
     if (fs.existsSync(backupPath)) {
       logger.info(`Prüfe Integrität für ${file} gegen Backup...`);
       const integrityCheck = spawnSync('node', [

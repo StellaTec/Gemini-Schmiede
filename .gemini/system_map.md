@@ -19,7 +19,7 @@ Agent-ID: BOSS-V1
 | ID | Feature / Modul | Status | Fokus | Plan-Datei |
 | :--- | :--- | :--- | :--- | :--- |
 | **REF01** | System-Standardisierung | ✅ Abgeschlossen | Clean Code & Modul-Check | `.gemini/plans/refactoring_standardization.md` |
-| **GEN01** | Framework-Portabilität | ⏳ Bereit | gemini.config.json | `.gemini/plans/framework_portability.md` |
+| **GEN01** | Framework-Portabilität | ✅ Abgeschlossen | gemini.config.json | `.gemini/plans/framework_portability.md` |
 | **SEC01** | Token-Security-Wächter | ⏳ Bereit | Schutz vor Context-Bloat | - |
 | **INFRA-GIT**| Git-Integrity-System | ⏳ Bereit | Ersetzt Backups durch Diffs | - |
 | **PROD-BRANCH**| Branch-per-Feature | ⏳ Bereit | Isolierte Feature-Entwicklung | - |
